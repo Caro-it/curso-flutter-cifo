@@ -13,22 +13,38 @@ class _PeopleListState extends State<PeopleList> {
   final _biggerFont = const TextStyle(fontSize: 18); // Nou
   final _randomNames = RandomNames(Zone.catalonia); // Nou
 
+  bool _loading = false;
+
+  void _addNames() {
+    for (var j = 0; j < 10; j++) {
+      _suggestions.add(_randomNames.fullName());
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _addNames(); // los 10 primeros nombres al arrancar
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
+      itemCount: _suggestions.length,
+      separatorBuilder: (context, i) => const Divider(),
       itemBuilder: (context, i) {
-        if (i >= _suggestions.length) {
-                    //Afegim 10 noms més
-          for (var j = 0; j < 10; j++) {
-            _suggestions.add(_randomNames.fullName());
-          }
+        // Al llegar al último nombre, generamos 10 más
+        if (i == _suggestions.length - 1 && !_loading) {
+          _loading = true;
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (!mounted) return;
+            setState(() {
+              _addNames();
+              _loading = false;
+            });
+          });
         }
-        return Column(
-          children: [
-            ListTile(title: Text(_suggestions[i], style: _biggerFont)),
-            const Divider(),
-          ],
-        );
+        return ListTile(title: Text(_suggestions[i], style: _biggerFont));
       },
     );
   }
