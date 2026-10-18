@@ -11,14 +11,14 @@ class PeopleList extends StatefulWidget {
 class _PeopleListState extends State<PeopleList> {
   final _suggestions = <String>[]; // Nou
   final _biggerFont = const TextStyle(fontSize: 18); // Nou
-  final _randomNames = RandomNames(Zone.us); // Nou
+  final _randomNames = RandomNames(Zone.catalonia); // Nou
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, i) {
         if (i >= _suggestions.length) {
-          //Afegim 10 noms més
+                    //Afegim 10 noms més
           for (var j = 0; j < 10; j++) {
             _suggestions.add(_randomNames.fullName());
           }
