@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:random_name_generator/random_name_generator.dart';
 
-
 class PeopleList extends StatefulWidget {
   const PeopleList({super.key});
 
@@ -24,7 +23,12 @@ class _PeopleListState extends State<PeopleList> {
             _suggestions.add(_randomNames.fullName());
           }
         }
-        return ListTile(title: Text(_suggestions[i], style: _biggerFont));
+        return Column(
+          children: [
+            ListTile(title: Text(_suggestions[i], style: _biggerFont)),
+            const Divider(),
+          ],
+        );
       },
     );
   }
