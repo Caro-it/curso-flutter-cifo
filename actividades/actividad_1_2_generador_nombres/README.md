@@ -1,17 +1,28 @@
-# flutter_application_1
+# Activitat 1.2 – Escriu la teva primera App en Flutter
 
-A new Flutter project.
+**Alumna:** María Carolina Kaechele Smoly
+**Curs:** FSE552026 – Desenvolupament d'aplicacions mòbils iOS i Android amb Flutter (CIFO La Violeta)
 
-## Getting Started
+## Descripció
+Aplicació Flutter que genera noms de persona a l'atzar i els mostra en una llista infinita: a mesura que l'usuari es desplaça, es generen nous noms.
 
-This project is a starting point for a Flutter application.
+## Fitxers principals
+- `lib/main.dart` – punt d'entrada de l'app i tema visual
+- `lib/people_list.dart` – pantalla principal amb la llista de noms
 
-A few resources to get you started if this is your first Flutter project:
+## Feina desenvolupada
+- **Paquet extern:** `faker` (`flutter pub add faker`) per generar noms i cognoms aleatoris.
+- **Widget amb estat:** `PeopleList` és un `StatefulWidget`; el seu `State` guarda la llista de noms i els favorits, i usa `setState()` per refrescar la pantalla.
+- **Llista infinita:** `ListView.builder` sense `itemCount`; quan s'arriba al final, es generen 20 noms més.
+- **Hot reload:** utilitzat durant el desenvolupament per veure els canvis sense reiniciar l'app.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Tasques addicionals
+- **Disseny personalitzat:** tema Material 3 amb color base lila, AppBar acolorida, avatars amb la inicial i tipografia ajustada.
+- **Més widgets / pantalles:** cada nom es pot marcar com a favorit (icona de cor) i un botó de l'AppBar obre una segona pantalla amb els favorits.
+- **Llibreria addicional:** `faker`.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Com executar-la
+```bash
+flutter pub get
+flutter run -d chrome
+```
