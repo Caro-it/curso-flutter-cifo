@@ -1,5 +1,6 @@
-import 'package:camins/screens/trail_detail_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'package:camins/screens/trail_detail_screen.dart';
 
 void main() {
   runApp(const CaminsApp());
@@ -10,6 +11,9 @@ class CaminsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: TrailDetailScreen());
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: TrailDetailScreen(),
+    );
   }
 }
