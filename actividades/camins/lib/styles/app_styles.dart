@@ -60,8 +60,28 @@ class AppStyles {
     fontWeight: FontWeight.bold,
     color: darkText,
   );
-    static final TextStyle buttonText = TextStyle(
+  static final TextStyle buttonText = TextStyle(
     fontSize: 15,
     fontWeight: FontWeight.bold,
+  );
+  static final TextStyle link = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: green,
+  );
+  static final TextStyle photoCount = TextStyle(
+    fontSize: 22,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
+    static final TextStyle stageName = TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.bold,
+    color: darkText,
+  );
+  static final TextStyle stageNumber = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    color: green,
   );
 }

@@ -1,5 +1,6 @@
 import 'package:camins/styles/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:camins/widgets/round_icon_button.dart';
 
 class TrailHeader extends StatelessWidget {
   const TrailHeader({
@@ -65,6 +66,24 @@ class TrailHeader extends StatelessWidget {
                     ),
                   ],
                 ),
+              ],
+            ),
+          ),
+          // Back button (top left)
+          const Positioned(
+            top: 44,
+            left: 16,
+            child: RoundIconButton(icon: Icons.arrow_back),
+          ),
+          // Share and favourite buttons (top right)
+          Positioned(
+            top: 44,
+            right: 16,
+            child: Row(
+              children: [
+                const RoundIconButton(icon: Icons.ios_share),
+                AppStyles.smallSeparator,
+                const RoundIconButton(icon: Icons.favorite_border),
               ],
             ),
           ),

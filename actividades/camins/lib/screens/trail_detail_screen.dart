@@ -1,4 +1,5 @@
 import 'package:camins/styles/app_styles.dart';
+import 'package:camins/widgets/stage_tile.dart';
 import 'package:camins/widgets/stat_item.dart';
 import 'package:camins/widgets/tag_chip.dart';
 import 'package:camins/widgets/trail_header.dart';
@@ -100,6 +101,105 @@ class TrailDetailScreen extends StatelessWidget {
               ],
             ),
           ),
+          // ───────── ZONA 5 · Fotos ─────────
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Fotos', style: AppStyles.sectionTitle),
+                    Text('Veure-les totes', style: AppStyles.link),
+                  ],
+                ),
+                AppStyles.smallSeparator,
+                GridView.count(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    for (final photo in [
+                      'lake',
+                      'peaks',
+                      'forest',
+                      'meadow',
+                      'waterfall',
+                    ])
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.asset(
+                          'assets/images/$photo.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Image.asset(
+                            'assets/images/sunset.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                          Container(color: Colors.black54),
+                          Center(
+                            child: Text('+18', style: AppStyles.photoCount),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          // ───────── ZONA 6 · Etapes ─────────
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Etapes', style: AppStyles.sectionTitle),
+                AppStyles.smallSeparator,
+                StageTile(
+                  number: 1,
+                  name: 'Banys de Tredòs',
+                  detail: 'Sortida · 1.750 m',
+                  time: '0:00',
+                ),
+                StageTile(
+                  number: 2,
+                  name: 'Refugi de Colomers',
+                  detail: '3,1 km · 2.135 m',
+                  time: '1:10',
+                ),
+                StageTile(
+                  number: 3,
+                  name: 'Estany Major',
+                  detail: '4,6 km · 2.180 m',
+                  time: '1:45',
+                ),
+                StageTile(
+                  number: 4,
+                  name: 'Estany Obago',
+                  detail: '6,2 km · 2.240 m',
+                  time: '2:30',
+                ),
+                const StageTile(
+                  number: 5,
+                  name: 'Tornada als Banys',
+                  detail: '9,4 km · 1.750 m',
+                  time: '3:45',
+                ),
+              ],
+            ),
+          ),
+          AppStyles.bigSeparator,
         ],
       ),
       bottomNavigationBar: Container(
