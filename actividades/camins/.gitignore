@@ -49,3 +49,6 @@ app.*.map.json
 
 *.zip
 
+# Java crash logs
+hs_err_pid*.log
+replay_pid*.log
