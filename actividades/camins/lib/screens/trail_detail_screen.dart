@@ -15,63 +15,73 @@ class TrailDetailScreen extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.zero,
         children: [
-          // ───────── ZONA 2 · Títol ─────────
-          const TrailHeader(
-            imagePath: 'assets/images/header.jpg',
-            region: "Pirineu · Val d'Aran",
-            title: 'Circuit dels Estanys de Colomers',
-            rating: '4,8',
-            reviewCount: 126,
-          ),
-          // ───────── ZONA 3 · Fitxa  ─────────
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-            child: Card(
-              color: Colors.white,
-              margin: EdgeInsets.zero,
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+          // ───────── ZONES 2 i 3 · Títol + Fitxa (sobresurt) ─────────
+          Stack(
+            children: [
+              const Column(
+                children: [
+                  TrailHeader(
+                    imagePath: 'assets/images/header.jpg',
+                    region: "Pirineu · Val d'Aran",
+                    title: 'Circuit dels Estanys de Colomers',
+                    rating: '4,8',
+                    reviewCount: 126,
+                  ),
+                  SizedBox(height: 44),
+                ],
               ),
-              child: SizedBox(
-                height: 88,
-                child: Row(
-                  children: [
-                    const Expanded(
-                      child: StatItem(
-                        icon: Icons.route,
-                        value: '9,4 km',
-                        label: 'Distància',
-                      ),
+              Positioned(
+                left: 20,
+                right: 20,
+                bottom: 0,
+                child: Card(
+                  color: Colors.white,
+                  margin: EdgeInsets.zero,
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: SizedBox(
+                    height: 88,
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          child: StatItem(
+                            icon: Icons.route,
+                            value: '9,4 km',
+                            label: 'Distància',
+                          ),
+                        ),
+                        const Expanded(
+                          child: StatItem(
+                            icon: Icons.trending_up,
+                            value: '620 m',
+                            label: 'Desnivell',
+                          ),
+                        ),
+                        const Expanded(
+                          child: StatItem(
+                            icon: Icons.schedule,
+                            value: '3 h 45',
+                            label: 'Durada',
+                          ),
+                        ),
+                        Expanded(
+                          child: StatItem(
+                            icon: Icons.terrain,
+                            value: 'Moderada',
+                            label: 'Dificultat',
+                            iconColor: AppStyles.orange,
+                          ),
+                        ),
+                      ],
                     ),
-                    const Expanded(
-                      child: StatItem(
-                        icon: Icons.trending_up,
-                        value: '620 m',
-                        label: 'Desnivell',
-                      ),
-                    ),
-                    const Expanded(
-                      child: StatItem(
-                        icon: Icons.schedule,
-                        value: '3 h 45',
-                        label: 'Durada',
-                      ),
-                    ),
-                    Expanded(
-                      child: StatItem(
-                        icon: Icons.terrain,
-                        value: 'Moderada',
-                        label: 'Dificultat',
-                        iconColor: AppStyles.orange,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-          // ───────── ZONA 4 · Sobre la ruta  ─────────
+          // ───────── ZONA 4 · Sobre la ruta ─────────
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
             child: Column(
@@ -87,10 +97,10 @@ class TrailDetailScreen extends StatelessWidget {
                   style: AppStyles.body,
                 ),
                 AppStyles.mediumSeparator,
-                Wrap(
+                const Wrap(
                   spacing: 8,
                   runSpacing: 8,
-                  children: const [
+                  children: [
                     TagChip(label: 'Circular', icon: Icons.loop),
                     TagChip(label: 'Estanys', icon: Icons.water),
                     TagChip(label: 'Gossos permesos', icon: Icons.pets),
@@ -166,25 +176,26 @@ class TrailDetailScreen extends StatelessWidget {
               children: [
                 Text('Etapes', style: AppStyles.sectionTitle),
                 AppStyles.smallSeparator,
-                StageTile(
+                const StageTile(
                   number: 1,
                   name: 'Banys de Tredòs',
                   detail: 'Sortida · 1.750 m',
                   time: '0:00',
+                  isFirst: true,
                 ),
-                StageTile(
+                const StageTile(
                   number: 2,
                   name: 'Refugi de Colomers',
                   detail: '3,1 km · 2.135 m',
                   time: '1:10',
                 ),
-                StageTile(
+                const StageTile(
                   number: 3,
                   name: 'Estany Major',
                   detail: '4,6 km · 2.180 m',
                   time: '1:45',
                 ),
-                StageTile(
+                const StageTile(
                   number: 4,
                   name: 'Estany Obago',
                   detail: '6,2 km · 2.240 m',
@@ -195,6 +206,7 @@ class TrailDetailScreen extends StatelessWidget {
                   name: 'Tornada als Banys',
                   detail: '9,4 km · 1.750 m',
                   time: '3:45',
+                  isLast: true,
                 ),
               ],
             ),
@@ -202,6 +214,7 @@ class TrailDetailScreen extends StatelessWidget {
           AppStyles.bigSeparator,
         ],
       ),
+      // ───────── ZONA 7 · Barra inferior ─────────
       bottomNavigationBar: Container(
         color: Colors.white,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),

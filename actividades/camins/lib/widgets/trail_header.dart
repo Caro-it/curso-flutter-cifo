@@ -1,6 +1,6 @@
 import 'package:camins/styles/app_styles.dart';
-import 'package:flutter/material.dart';
 import 'package:camins/widgets/round_icon_button.dart';
+import 'package:flutter/material.dart';
 
 class TrailHeader extends StatelessWidget {
   const TrailHeader({
@@ -37,7 +37,7 @@ class TrailHeader extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 20,
+            bottom: 64,
             left: 20,
             right: 20,
             child: Column(

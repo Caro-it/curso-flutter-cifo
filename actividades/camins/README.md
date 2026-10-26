@@ -2,12 +2,12 @@
 
 Fitxa d'una ruta de muntanya feta amb Flutter a partir d'un disseny.
 
-**Nivell:** Ampliació + dos detalls del Repte (botons rodons i «+18» a l'última foto)
+**Nivell:** Repte (Base + Ampliació + els quatre detalls del Repte)
 
 ## Captures
 
-| Inici                              | Fotos                              | Etapes                               |
-| ---------------------------------- | ---------------------------------- | ------------------------------------ |
+| Inici | Fotos | Etapes |
+|---|---|---|
 | ![Inici](screenshots/01_inici.png) | ![Fotos](screenshots/02_fotos.png) | ![Etapes](screenshots/03_etapes.png) |
 
 ## Estructura del codi
@@ -29,16 +29,18 @@ lib/
 
 ## Què he fet a cada zona
 
-| Zona               | Nivell    | Com l'he fet                                                                                                                                                  |
-| ------------------ | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1 · Botons         | Repte     | Tres `RoundIconButton` (un `IconButton` blanc de 44 × 44) col·locats amb `Positioned` sobre la imatge.                                                        |
-| 2 · Títol          | Base      | `Stack` amb la imatge (`BoxFit.cover`), un `LinearGradient` de transparent a negre i un `Positioned` amb la regió, el títol i la valoració.                   |
-| 3 · Fitxa de dades | Base      | `Card` blanc amb una `Row` de quatre `Expanded`, cadascun amb un `StatItem`. La icona de Dificultat és taronja gràcies a un paràmetre opcional (`iconColor`). |
-| 4 · Sobre la ruta  | Base      | Títol, text i un `Wrap` de `TagChip` que salten de línia sols quan no caben.                                                                                  |
-| 5 · Fotos          | Ampliació | `GridView.count` de 3 columnes amb `shrinkWrap` i `NeverScrollableScrollPhysics`. Les fotos es generen amb un bucle `for` i s'arrodoneixen amb `ClipRRect`.   |
-| 5 · «+18»          | Repte     | L'última foto és un `Stack` amb la imatge, una capa fosca i el text «+18» centrat.                                                                            |
-| 6 · Etapes         | Ampliació | Cinc `StageTile` basats en `ListTile`, amb el número dins d'un `CircleAvatar`.                                                                                |
-| 7 · Barra inferior | Base      | `bottomNavigationBar` de l'`Scaffold`, sempre visible encara que facis scroll.                                                                                |
+| Zona | Nivell | Com l'he fet |
+|---|---|---|
+| 1 · Botons | Repte | Tres `RoundIconButton` (un `IconButton` blanc de 44 × 44) col·locats amb `Positioned` sobre la imatge. |
+| 2 · Títol | Base | `Stack` amb la imatge (`BoxFit.cover`), un `LinearGradient` de transparent a negre i un `Positioned` amb la regió, el títol i la valoració. |
+| 3 · Fitxa de dades | Base | `Card` blanc amb una `Row` de quatre `Expanded`, cadascun amb un `StatItem`. La icona de Dificultat és taronja gràcies a un paràmetre opcional (`iconColor`). |
+| 3 · Fitxa que sobresurt | Repte | La capçalera i la fitxa van dins d'un mateix `Stack`: una `Column` amb la capçalera i un espai de 44, i la fitxa en un `Positioned` a baix de tot, de manera que sobresurt 44 de la imatge. |
+| 4 · Sobre la ruta | Base | Títol, text i un `Wrap` de `TagChip` que salten de línia sols quan no caben. |
+| 5 · Fotos | Ampliació | `GridView.count` de 3 columnes amb `shrinkWrap` i `NeverScrollableScrollPhysics`. Les fotos es generen amb un bucle `for` i s'arrodoneixen amb `ClipRRect`. |
+| 5 · «+18» | Repte | L'última foto és un `Stack` amb la imatge, una capa fosca i el text «+18» centrat. |
+| 6 · Etapes | Ampliació | Cinc `StageTile`, amb el número dins d'un `CircleAvatar`, el nom, el detall i l'hora. |
+| 6 · Línia vertical | Repte | `StageTile` fet amb `Row` i un `Stack`: una línia de 2 (`ColoredBox` en un `Positioned`) darrere del cercle. Els paràmetres `isFirst` i `isLast` fan que la línia no sobresurti a la primera i l'última etapa. |
+| 7 · Barra inferior | Base | `bottomNavigationBar` de l'`Scaffold`, sempre visible encara que facis scroll. |
 
 ## Bones pràctiques
 
