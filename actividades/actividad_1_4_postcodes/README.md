@@ -3,13 +3,17 @@
 App que busca poblaciones de España por código postal o por nombre con la API de geocodificación de Open-Meteo.
 
 **Alumna:** María Carolina Kaechele Smoly
-**Nivel:** Base
+**Nivel:** Ampliación (Base + Ampliación)
 
 ## Capturas
 
 | Inicio | Cargando | Resultados | No encontrado | Error |
 |---|---|---|---|---|
 | ![Inicio](screenshots/01_inici.png) | ![Cargando](screenshots/02_carregant.png) | ![Resultados](screenshots/03_resultats.png) | ![No encontrado](screenshots/04_no_trobat.png) | ![Error](screenshots/05_error.png) |
+
+| Detalle (Barcelona) | Detalle sin datos (Sant Pere de Reixac) |
+|---|---|
+| ![Detalle](screenshots/06_detall.png) | ![Detalle sin datos](screenshots/07_detall_sense_dades.png) |
 
 ## Estructura del código
 
@@ -21,7 +25,8 @@ lib/
 │   ├── place.dart             Cada población
 │   └── search_status.dart     Los 5 estados de la pantalla
 ├── screens/
-│   └── search_screen.dart     Pantalla de búsqueda
+│   ├── search_screen.dart     Pantalla de búsqueda
+│   └── place_detail_screen.dart  Detalle de una población
 ├── styles/
 │   └── app_styles.dart        Colores y espacios
 └── widgets/
@@ -38,6 +43,9 @@ lib/
 | `elevation` | quicktype lo había deducido como `int` porque los valores parecían enteros (`168.0`). Lo he cambiado a `double?` con `toDouble()`. |
 | Búsqueda | `TextField` con `TextInputAction.search` y `onSubmitted`. La URL se construye con `Uri.https`, que codifica los espacios («Sant Pere»). |
 | Estados | Un `enum SearchStatus` y un `switch` que muestra un widget distinto para cada estado: inicio, cargando, resultados, no encontrado y error. |
+| Detalle | `PlaceDetailScreen` recibe la `Place` elegida y muestra nombre (en el `AppBar`), provincia, comunidad, habitantes, coordenadas y todos los códigos postales. Se abre con `Navigator.push`; al volver con la flecha atrás, los resultados siguen ahí porque la pantalla de búsqueda no se destruye. |
+| Códigos postales | Un `Wrap` con un `Chip` por código, que salta de línea solo (Barcelona tiene 45). Se ordenan con `sort()` y, si no hay, se muestra «Sense codis postals». |
+| Datos que faltan | Si no hay habitantes se muestra «Sense dades» (por ejemplo, Sant Pere de Reixac). |
 | No encontrado vs error | Si la respuesta llega bien pero sin poblaciones → no encontrado. Si la llamada falla (sin conexión o `statusCode` distinto de 200) → error, con un botón para volver a intentarlo. |
 
 ## Buenas prácticas
@@ -69,4 +77,4 @@ Que con el 99999 la API no devuelve una lista vacía, sino que directamente no e
 A conectar una app a una API con `http`, a convertir el JSON en clases de Dart y a controlar los estados de una pantalla con un `enum` y un `switch`. Sobre todo, la diferencia entre «no encontrado» (la respuesta llega bien pero vacía) y «error» (la llamada falla).
 
 **Qué cambiaría:**
-Me gustaría solucionar el problema del emulador de Android y probar la app en un móvil, porque en Chrome algunas cosas funcionan distinto. También me gustaría mejorar el diseño y añadir la pantalla de detalle y las búsquedas recientes.
+Me gustaría solucionar el problema del emulador de Android y probar la app en un móvil, porque en Chrome algunas cosas funcionan distinto. También me gustaría mejorar el diseño y hacer el Reto: el tiempo en el detalle y las búsquedas recientes.

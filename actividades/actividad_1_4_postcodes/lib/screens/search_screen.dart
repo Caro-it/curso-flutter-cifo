@@ -7,6 +7,7 @@ import '../models/search_status.dart'; // NUEVO
 import '../styles/app_styles.dart';
 import '../widgets/message_view.dart';
 import '../widgets/place_tile.dart';
+import 'place_detail_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -56,7 +57,15 @@ class _SearchScreenState extends State<SearchScreen> {
       case SearchStatus.success:
         return ListView.builder(
           itemCount: _places.length,
-          itemBuilder: (context, i) => PlaceTile(place: _places[i]),
+          itemBuilder: (context, i) => PlaceTile(
+            place: _places[i],
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PlaceDetailScreen(place: _places[i]),
+              ),
+            ),
+          ),
         );
     }
   }
