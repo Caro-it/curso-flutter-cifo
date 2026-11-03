@@ -21,6 +21,7 @@ class _SearchScreenState extends State<SearchScreen> {
   SearchStatus _status = SearchStatus.initial; // NUEVO: estado de la pantalla
   List<Place> _places = []; // NUEVO: resultados
   String _query = ''; // NUEVO: lo último buscado
+  final List<String> _recent = []; // últimas búsquedas con resultados
 
   @override
   void dispose() {
@@ -102,8 +103,12 @@ class _SearchScreenState extends State<SearchScreen> {
             ? SearchStatus
                   .notFound // → NO ENCONTRADO
             : SearchStatus.success; // → RESULTADOS
+        if (places.isNotEmpty) {
+          _recent.remove(query);
+          _recent.insert(0, query);
+          if (_recent.length > 5) _recent.removeLast();
+        }
       });
-      debugPrint('Estat: $_status · Trobades: ${places.length}'); // provisional
     } catch (e) {
       debugPrint('Error: $e');
       if (!mounted) return;
@@ -134,6 +139,29 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
           ),
+          if (_recent.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppStyles.spaceM),
+              child: Wrap(
+                spacing: AppStyles.spaceS,
+                runSpacing: AppStyles.spaceS,
+                children: _recent
+                    .map(
+                      (q) => ActionChip(
+                        avatar: const Icon(
+                          Icons.history,
+                          size: AppStyles.spaceM,
+                        ),
+                        label: Text(q),
+                        onPressed: () {
+                          _controller.text = q;
+                          _search(q);
+                        },
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
           Expanded(child: _buildBody()),
         ],
       ),

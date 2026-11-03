@@ -3,7 +3,7 @@
 App que busca poblaciones de España por código postal o por nombre con la API de geocodificación de Open-Meteo.
 
 **Alumna:** María Carolina Kaechele Smoly
-**Nivel:** Ampliación (Base + Ampliación)
+**Nivel:** Reto (Base + Ampliación + Reto)
 
 ## Capturas
 
@@ -15,6 +15,10 @@ App que busca poblaciones de España por código postal o por nombre con la API 
 |---|---|
 | ![Detalle](screenshots/06_detall.png) | ![Detalle sin datos](screenshots/07_detall_sense_dades.png) |
 
+| El tiempo | El tiempo con error | Búsquedas recientes |
+|---|---|---|
+| ![El tiempo](screenshots/08_temps.png) | ![El tiempo con error](screenshots/09_temps_error.png) | ![Búsquedas recientes](screenshots/10_recents.png) |
+
 ## Estructura del código
 
 ```
@@ -23,7 +27,10 @@ lib/
 ├── models/
 │   ├── search_response.dart   Respuesta de la API (lista results)
 │   ├── place.dart             Cada población
-│   └── search_status.dart     Los 5 estados de la pantalla
+│   ├── search_status.dart     Los 5 estados de la pantalla
+│   ├── weather_response.dart  Respuesta de la API del tiempo
+│   ├── current.dart           El tiempo de ahora
+│   └── current_units.dart     Las unidades (°C, km/h)
 ├── screens/
 │   ├── search_screen.dart     Pantalla de búsqueda
 │   └── place_detail_screen.dart  Detalle de una población
@@ -46,6 +53,8 @@ lib/
 | Detalle | `PlaceDetailScreen` recibe la `Place` elegida y muestra nombre (en el `AppBar`), provincia, comunidad, habitantes, coordenadas y todos los códigos postales. Se abre con `Navigator.push`; al volver con la flecha atrás, los resultados siguen ahí porque la pantalla de búsqueda no se destruye. |
 | Códigos postales | Un `Wrap` con un `Chip` por código, que salta de línea solo (Barcelona tiene 45). Se ordenan con `sort()` y, si no hay, se muestra «Sense codis postals». |
 | Datos que faltan | Si no hay habitantes se muestra «Sense dades» (por ejemplo, Sant Pere de Reixac). |
+| El tiempo (Reto) | `PlaceDetailScreen` pasa a ser `StatefulWidget`. En `initState` se crea el `Future` que llama a la API del tiempo con las coordenadas de la población, y un `FutureBuilder` muestra el círculo mientras carga, un mensaje si falla (el resto del detalle se sigue viendo) o la temperatura, el viento y la descripción del cielo según el `weather_code`. Modelos con quicktype (`WeatherResponse`, `Current`, `CurrentUnits`), corrigiendo otra vez `elevation` a `double?`. |
+| Búsquedas recientes (Reto) | Una lista `_recent` con las 5 últimas búsquedas que han encontrado algo, la más nueva primero y sin repetir (`remove` + `insert(0, ...)`). Se muestran con `ActionChip` bajo el buscador y, al tocar una, se vuelve a buscar. |
 | No encontrado vs error | Si la respuesta llega bien pero sin poblaciones → no encontrado. Si la llamada falla (sin conexión o `statusCode` distinto de 200) → error, con un botón para volver a intentarlo. |
 
 ## Buenas prácticas
@@ -77,4 +86,4 @@ Que con el 99999 la API no devuelve una lista vacía, sino que directamente no e
 A conectar una app a una API con `http`, a convertir el JSON en clases de Dart y a controlar los estados de una pantalla con un `enum` y un `switch`. Sobre todo, la diferencia entre «no encontrado» (la respuesta llega bien pero vacía) y «error» (la llamada falla).
 
 **Qué cambiaría:**
-Me gustaría solucionar el problema del emulador de Android y probar la app en un móvil, porque en Chrome algunas cosas funcionan distinto. También me gustaría mejorar el diseño y hacer el Reto: el tiempo en el detalle y las búsquedas recientes.
+Me gustaría solucionar el problema del emulador de Android y probar la app en un móvil, porque en Chrome algunas cosas funcionan distinto. También me gustaría mejorar el diseño y guardar las búsquedas recientes en el móvil para que no se pierdan al cerrar la app.
